@@ -34,14 +34,14 @@ app.get('/pin/:pinId', function(request, response) {
 });
 
 
-app.post('/pin/', function(request, response) {
-	
+app.post('/pin', function(request, response) {
 	console.log(request.body);
 
-	response.end();    
-
+	response.end();
 });
 
-
+app.options('/pin', function(request, response){
+    response.end();
+});
 
 app.listen(8080);
