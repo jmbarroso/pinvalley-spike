@@ -33,4 +33,15 @@ app.get('/pin/:pinId', function(request, response) {
     response.end(JSON.stringify(pin));
 });
 
+
+app.post('/pin/', function(request, response) {
+	
+	console.log(request.body);
+
+	response.end();    
+
+});
+
+
+
 app.listen(8080);
