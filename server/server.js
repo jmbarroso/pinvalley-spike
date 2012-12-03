@@ -14,6 +14,7 @@ var allowCrossDomain = function (req, res, next) {
 
 app.configure(function() {
     app.use(allowCrossDomain);
+    app.use(express.bodyParser());
 });
 
 app.get('/hello', function(request, response) {
@@ -37,6 +38,11 @@ app.get('/pin/:pinId', function(request, response) {
 app.post('/pin/', function(request, response) {
 	
 	console.log(request.body);
+
+	console.log(req.is('html'));
+
+     // When Content-Type is application/json
+     console.log(req.is('json'));
 
 	response.end();    
 
