@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>hello-backbonejs</title>
+</head>
+<body>
+
+<div id="pinViewAttachmentPoint" />
+
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+
+<script type="text/javascript">
+    (function() {
+
+        var pinView = Backbone.View.extend({
+            el: '#pinViewAttachmentPoint',
+
+            render: function() {
+                this.$el.html('Hola mundo cruel');
+            }
+        });
+
+        var pinModel = Backbone.Model.extend({
+            initialize: function(attributes) {
+                this.url = 'http://localhost:8080/pin/' + attributes.id;
+            }
+
+        });
+
+        var pinCollection = Backbone.Collection.extend({
+            url: 'http://localhost:8080/pin',
+
+            model: pinModel
+        });
+
+        window.pinView = new pinView();
+        window.pinModel = new pinModel({id: 4});
+        window.pinCollection = new pinCollection();
+    })();
+</script>
+</body>
+</html>
