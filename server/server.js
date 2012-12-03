@@ -33,4 +33,15 @@ app.get('/pin/:pinId', function(request, response) {
     response.end(JSON.stringify(pin));
 });
 
+app.get('/pin', function(request, response) {
+    var pins = [
+        { id : 4, name : 'startup 4' },
+        { id : 6, name : 'startup 6' },
+        { id : 7, name : 'startup 7' },
+        { id : 8, name : 'startup 8' },
+        { id : 4, name : 'startup 4' }
+    ];
+    response.end(JSON.stringify(pins));
+});
+
 app.listen(8080);
