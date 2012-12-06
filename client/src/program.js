@@ -9,19 +9,13 @@
     });
 
     var pinModel = Backbone.Model.extend({
-        initialize:function (attributes) {
-            if (attributes.id)
-                this.url = 'http://localhost:8080/pin/' + attributes.id;
-            else
-                this.url = 'http://localhost:8080/pin';
-        }
-
+        idAttribute: '_id',
+        urlRoot: 'http://localhost:8080/pin'
     });
 
     var pinCollection = Backbone.Collection.extend({
-        url:'http://localhost:8080/pin',
-
-        model:pinModel
+        url: 'http://localhost:8080/pin',
+        model: pinModel
     });
 
     window.pinView = new pinView();

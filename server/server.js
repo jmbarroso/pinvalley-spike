@@ -1,6 +1,9 @@
-var express = require('express');
+var express = require('express'),
+    mongoose = require('mongoose');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/pinvalley-spike-database');
 
 var allowCrossDomain = function (req, res, next) {
     res.header('Content-Type', 'application/json');
@@ -45,12 +48,31 @@ app.get('/pin', function(request, response) {
     response.end(JSON.stringify(pins));
 });
 
+var Pin = new mongoose.Schema({
+    name: { type: String, required: true },
+    latitude: { type: Number, required: true},
+    longitude: { type: Number, required: true}
+});
+
+var PinModel = mongoose.model('Pin', Pin);
+
 app.post('/pin', function(request, response) {
-	console.log(request.body);
+    console.log("POST: " + request.body);
 
+    var pin = new PinModel({
+        name: request.body.name,
+        latitude: request.body.latitude,
+        longitude: request.body.longitude
+    });
+    pin.save(function(err) {
+        if (!err) {
+            return console.log("created pin");
+        } else {
+            return console.log(err);
+        }
+    });
 
-	response.end();
-
+	return response.send(pin);
 });
 
 app.options('/pin', function(request, response){
